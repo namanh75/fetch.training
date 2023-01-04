@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">QR scanner</string>
+    <string name="title_home">Trang chủ</string>
+    <string name="title_createQr">Tạo mã QR</string>
+    <string name="title_history">Lịch sử</string>
+    <string name="title_settings">Cài đặt</string>
+    <string name="button_history_create">TẠO</string>
+    <string name="button_history_scan">QUÉT</string>
+    <string name="button_delete_qr">Xoá</string>
+</resources>
