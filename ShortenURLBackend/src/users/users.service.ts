@@ -49,8 +49,8 @@ export class UsersService {
     var password_hash = user.password;
     user.password = await bcrypt.hash(password_hash, saltOrRounds);
 
-    const { id, username, password } = user;
-    const data = new User(id, username, password);
+    const { username, password } = user;
+    const data = new User(null, username, password);
     await this.userRepository.persistAndFlush(data);
     return data;
   }

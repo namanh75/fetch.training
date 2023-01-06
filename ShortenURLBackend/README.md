@@ -18,16 +18,16 @@ In the file app.module.ts replace your Mysql
 API: http://localhost:3000/users/register
 Method: POST
 Data: {
-    username:"username",
-    password:"password"
+    "username":"username",
+    "password":"password"
 }
 
 # api login
 http://localhost:3000/auth/login
 Method: POST
 Body: {
-    username:"username",
-    password:"password"
+    "username":"username",
+    "password":"password"
 }
 Headers: {
     'Authorization': 'Bearer ' + access_token

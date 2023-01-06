@@ -43,7 +43,7 @@ export class UserShorternLinkService {
     private readonly crudPackageLinkService: CrudPackageLinkService,
     private readonly crudHistoryRegistrationService: CrudHistoryRegistrationService,
   ) {}
-    
+
   async registerPackage(packageData: UserPackageDto): Promise<UserPackageDto> {
     var currentDate = new Date();
     var packageDate = new Date();

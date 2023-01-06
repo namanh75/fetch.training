@@ -25,6 +25,10 @@ export class ShortenLink {
 
   @Property()
   @AutoMap()
+  view: number;
+
+  @Property()
+  @AutoMap()
   createdate: Date;
 
   constructor(
@@ -33,6 +37,7 @@ export class ShortenLink {
     url: string,
     shortenlink: string,
     status: number,
+    view: number,
     createdate: Date,
   ) {
     this.id = id;
@@ -40,6 +45,7 @@ export class ShortenLink {
     this.url = url;
     this.shortenlink = shortenlink;
     this.status = status;
+    this.view = view;
     this.createdate = createdate;
   }
 }

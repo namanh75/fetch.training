@@ -39,12 +39,13 @@ export class CrudShortenLinkService {
     urlString: string,
     shortenLink: string,
   ): Promise<ShortenLink> {
-    const { id, username, url, shortenlink, status, createdate } = {
+    const { id, username, url, shortenlink, status, view, createdate } = {
       id: null,
       username: name,
       url: urlString,
       shortenlink: shortenLink,
       status: 1,
+      view: 0,
       createdate: new Date(),
     };
     const data = new ShortenLink(
@@ -53,6 +54,7 @@ export class CrudShortenLinkService {
       url,
       shortenlink,
       status,
+      view,
       createdate,
     );
     await this.shortenLinkRepository.persistAndFlush(data);

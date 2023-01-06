@@ -19,6 +19,9 @@ export class ShortenLinkDto {
   status: number;
 
   @AutoMap()
+  view: number;
+
+  @AutoMap()
   createdate: Date;
 }
 

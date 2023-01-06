@@ -11,6 +11,7 @@ import {
   UseInterceptors,
   Param,
   Req,
+  Session,
 } from '@nestjs/common';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 import { ShortenLinkDto } from '../dto/shortenlink.dto';
@@ -36,14 +37,6 @@ export class LinkController {
     return result;
   }
 
-  @Get('/:shortenlink')
-  async redirectShortenLink(
-    @Param('shortenlink') shortenlink: string,
-  ): Promise<ShortenLinkDto> {
-    const result = await this.linkService.getURL(shortenlink);
-    return result;
-  }
-
   @UseGuards(JwtAuthGuard)
   @UseInterceptors(
     MapInterceptor(ShortenLink, ShortenLinkDto, { isArray: true }),
@@ -52,6 +45,16 @@ export class LinkController {
   async getHistory(@Request() req): Promise<ShortenLinkDto[]> {
     const results = await this.linkService.getHistory(req.user.username);
     return results;
+  }
+
+  @Get('/:shortenlink')
+  async redirectShortenLink(
+    @Param('shortenlink') shortenlink: string,
+    @Session() session: Record<string, any>,
+  ): Promise<ShortenLinkDto> {
+    const sessionId = session.id;
+    const result = await this.linkService.getURL(shortenlink, sessionId);
+    return result;
   }
 
   @UseGuards(JwtAuthGuard)

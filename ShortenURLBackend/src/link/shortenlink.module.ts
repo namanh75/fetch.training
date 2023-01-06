@@ -17,6 +17,7 @@ import { CrudShortenLinkService } from './services/crud/shortenlink.crud.service
 import { CrudRegistrationService } from './services/crud/registration.crud.service';
 import { CrudPackageLinkService } from './services/crud/package.crud.service';
 import { CrudHistoryRegistrationService } from './services/crud/historyregistration.crud.service';
+import { Session } from './entities/session.entity';
 
 @Module({
   imports: [
@@ -27,6 +28,7 @@ import { CrudHistoryRegistrationService } from './services/crud/historyregistrat
       UserPackage,
       HistoryRegistration,
       NumberLink,
+      Session
     ]),
   ],
   controllers: [
@@ -42,7 +44,7 @@ import { CrudHistoryRegistrationService } from './services/crud/historyregistrat
     CrudShortenLinkService,
     CrudRegistrationService,
     CrudPackageLinkService,
-    CrudHistoryRegistrationService
+    CrudHistoryRegistrationService,
   ],
   exports: [ShortenLinkService],
 })

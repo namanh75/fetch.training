@@ -8,6 +8,7 @@ import { InjectRepository } from '@mikro-orm/nestjs';
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { ShortenLinkDto, ShortenLinkMethodDto } from '../dto/shortenlink.dto';
 import { NumberLink } from '../entities/numberlink.entity';
+import { Session } from '../entities/session.entity';
 import { ShortenLink } from '../entities/shortenlink.entity';
 import { CrudShortenLinkService } from './crud/shortenlink.crud.service';
 const format = require('date-fns/format');
@@ -21,6 +22,8 @@ export class ShortenLinkService {
     private shortenLinkRepository: EntityRepository<ShortenLink>,
     @InjectRepository(NumberLink)
     private numberLinkRepository: EntityRepository<NumberLink>,
+    @InjectRepository(Session)
+    private sessionRepository: EntityRepository<Session>,
     private readonly crudShortenLinkRepository: CrudShortenLinkService,
   ) {}
 
@@ -114,10 +117,19 @@ export class ShortenLinkService {
     return data;
   }
 
-  async getURL(shortenlink: string): Promise<ShortenLink> {
+  async getURL(shortenlink: string, sessionID: string): Promise<ShortenLink> {
     const resultShortLink = await this.crudShortenLinkRepository.getShortenLink(
       shortenlink,
     );
+    const resultSession = await this.sessionRepository.findOne({
+      sessionID: sessionID,
+    });
+    if (!resultSession) {
+      resultShortLink.view += 1;
+      await this.crudShortenLinkRepository.updateShortenLink(resultShortLink);
+      const newSession = new Session(null, sessionID);
+      await this.sessionRepository.persistAndFlush(newSession);
+    }
     return new ShortenLinkMethodDto().getUrl(resultShortLink.url);
   }
 }

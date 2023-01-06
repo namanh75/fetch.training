@@ -36,7 +36,6 @@ export class AuthService {
   async login(user: UserDto): Promise<AuthDto> {
     const payload_access = {
       username: user.username,
-      id: user.id,
     };
     const payload_refresh = {
       username: user.username,
