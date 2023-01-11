@@ -2,7 +2,7 @@ import { AutoMap } from '@automapper/classes';
 import { Entity, PrimaryKey, Property } from '@mikro-orm/core';
 import { IsNotEmpty } from 'class-validator';
 
-@Entity({ tableName: 'packagelink' })
+@Entity({ tableName: 'package_link' })
 export class PackageLink {
   @PrimaryKey()
   @IsNotEmpty({ message: 'package name is not empty' })

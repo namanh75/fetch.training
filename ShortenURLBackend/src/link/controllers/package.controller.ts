@@ -19,7 +19,7 @@ import { PackageLinkService } from '../services/package.service';
 export class PackageLinkController {
   constructor(private readonly packageLinkService: PackageLinkService) {}
 
-  @Get('/all')
+  @Get('/all-package')
   async getAllPackageLink(): Promise<PackageDto[]> {
     const results = await this.packageLinkService.getPackageLink();
     return results;

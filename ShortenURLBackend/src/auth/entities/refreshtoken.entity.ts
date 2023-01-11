@@ -1,6 +1,6 @@
 import { Entity, PrimaryKey, Property } from '@mikro-orm/core';
 
-@Entity({ tableName: 'refreshtoken' })
+@Entity({ tableName: 'refresh_token' })
 export class RefreshToken {
   @PrimaryKey()
   username: string;

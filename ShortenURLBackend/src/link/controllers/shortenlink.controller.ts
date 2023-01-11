@@ -12,6 +12,8 @@ import {
   Param,
   Req,
   Session,
+  Query,
+  Put,
 } from '@nestjs/common';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 import { ShortenLinkDto } from '../dto/shortenlink.dto';
@@ -58,13 +60,18 @@ export class LinkController {
   }
 
   @UseGuards(JwtAuthGuard)
-  @Get('/:shortenlink/disable')
+  @Put('/:shortenlink/enable')
   async disableShortenLink(
     @Param('shortenlink') shortenlink: string,
     @Req() req,
+    @Query('q') enable: string,
   ): Promise<ShortenLinkDto> {
     const username = req.user.username;
-    const status = 0;
+    var status = 0;
+    if (enable == 'true') {
+      status = 1;
+    }
+    if (enable == 'false') status = 0;
     const results = await this.linkService.activeShortenLink(
       username,
       shortenlink,
@@ -73,19 +80,4 @@ export class LinkController {
     return results;
   }
 
-  @UseGuards(JwtAuthGuard)
-  @Get('/:shortenlink/enable')
-  async enableShortenLink(
-    @Param('shortenlink') shortenlink: string,
-    @Req() req,
-  ): Promise<ShortenLinkDto> {
-    const username = req.user.username;
-    const status = 1;
-    const results = await this.linkService.activeShortenLink(
-      username,
-      shortenlink,
-      status,
-    );
-    return results;
-  }
 }

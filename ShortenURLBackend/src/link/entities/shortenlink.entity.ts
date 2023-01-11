@@ -2,9 +2,9 @@ import { AutoMap } from '@automapper/classes';
 import { Entity, PrimaryKey, Property } from '@mikro-orm/core';
 import { IsNotEmpty, IsUrl } from 'class-validator';
 
-@Entity({ tableName: 'shortenlink' })
+@Entity({ tableName: 'shorten_link' })
 export class ShortenLink {
-  @PrimaryKey()
+  @PrimaryKey({ default: null })
   id: number;
 
   @Property()

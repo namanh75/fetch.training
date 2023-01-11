@@ -2,7 +2,7 @@ import { AutoMap } from '@automapper/classes';
 import { Entity, PrimaryKey, Property } from '@mikro-orm/core';
 import { IsNotEmpty } from 'class-validator';
 
-@Entity({ tableName: 'userpackage' })
+@Entity({ tableName: 'user_package' })
 export class UserPackage {
   @PrimaryKey()
   id: number;

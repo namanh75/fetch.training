@@ -72,8 +72,9 @@ export class ShortenLinkService {
     do {
       const shortenLink = await this.generateString(7);
 
-      var sqlResultShortLink =
-        await this.crudShortenLinkRepository.getShortenLink(shortenLink);
+      var sqlResultShortLink = await this.shortenLinkRepository.findOne({
+        shortenlink: shortenLink,
+      });
       if (!sqlResultShortLink) {
         const data = await this.crudShortenLinkRepository.createShortenLink(
           username,

@@ -6,7 +6,6 @@ import {
 } from '@mikro-orm/core';
 import { InjectRepository } from '@mikro-orm/nestjs';
 import {
-  ConsoleLogger,
   HttpException,
   HttpStatus,
   Injectable,

@@ -1,7 +1,7 @@
 import { AutoMap } from '@automapper/classes';
 import { Entity, PrimaryKey, Property } from '@mikro-orm/core';
 
-@Entity({ tableName: 'numberlink' })
+@Entity({ tableName: 'number_link' })
 export class NumberLink {
   @PrimaryKey()
   @AutoMap()
