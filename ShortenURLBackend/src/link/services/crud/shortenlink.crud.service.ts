@@ -16,11 +16,14 @@ export class CrudShortenLinkService {
       shortenlink: shortenlink,
     });
     if (!sqlResultShortLink) {
-      throw new HttpException('Link không tồn tại', HttpStatus.BAD_REQUEST);
+      throw new HttpException(
+        'This link does not exist',
+        HttpStatus.BAD_REQUEST,
+      );
     }
     if (sqlResultShortLink.status == 0) {
       throw new HttpException(
-        'Link hiện tại không khả dụng',
+        'This link is not available',
         HttpStatus.BAD_REQUEST,
       );
     }
@@ -70,6 +73,10 @@ export class CrudShortenLinkService {
     username: string,
     shortenlink: string,
   ): Promise<ShortenLink> {
+    const data = await this.shortenLinkRepository.removeAndFlush({
+      username: username,
+      shortenlink: shortenlink,
+    });
     return;
   }
 }

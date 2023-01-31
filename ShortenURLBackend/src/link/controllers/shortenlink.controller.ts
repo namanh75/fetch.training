@@ -77,6 +77,7 @@ export class LinkController {
       shortenlink,
       status,
     );
+    console.log("🚀 ~ file: shortenlink.controller.ts:80 ~ LinkController ~ results", results)
     return results;
   }
 

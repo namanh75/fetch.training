@@ -29,9 +29,9 @@ export class ShortenLinkService {
 
   async generateString(length: Number): Promise<string> {
     var result = '';
-    var characters =
+    const characters =
       'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    var charactersLength = characters.length;
+    const charactersLength = characters.length;
     for (var i = 0; i < length; i++) {
       result += characters.charAt(Math.floor(Math.random() * charactersLength));
     }
@@ -42,7 +42,7 @@ export class ShortenLinkService {
     username: string,
     urlString: string,
   ): Promise<ShortenLinkDto> {
-    var sqlResulNumberLink = await this.numberLinkRepository.find(
+    var sqlResultNumberLink = await this.numberLinkRepository.find(
       {
         username: username,
       },
@@ -51,7 +51,7 @@ export class ShortenLinkService {
       },
     );
     var checkDate = false;
-    for (var numberlink of sqlResulNumberLink) {
+    for (var numberlink of sqlResultNumberLink) {
       if (numberlink.datelink < new Date()) continue;
       else {
         var currentlink = numberlink.currentlink;
@@ -63,7 +63,7 @@ export class ShortenLinkService {
     }
     if (!checkDate) {
       throw new HttpException(
-        'Hết số link khả dụng, vui lòng đăng ký hoặc gia hạn',
+        'Out of available links, please register or extend',
         HttpStatus.BAD_REQUEST,
       );
     }
@@ -107,7 +107,7 @@ export class ShortenLinkService {
     });
     if (!sqlResultShortenLink) {
       throw new HttpException(
-        'Link không tồn tại hoặc bạn không có quyền truy cập',
+        'Link does not exist or you do not have access',
         HttpStatus.BAD_REQUEST,
       );
     }

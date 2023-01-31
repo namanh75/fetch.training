@@ -33,6 +33,8 @@ export class UserPackageDto {
 }
 
 export class UserPackageMethodDto extends UserPackageDto {
+
+  
   //register a new package or extend package
   registerPackage(packageData: UserPackage) {
     super.id = packageData.id;
